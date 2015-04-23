@@ -1,0 +1,49 @@
+function [w,x] = ModifiedEuler(a,b,N,initialApprox, f)
+% MODIFIEDEULER gives an array which approximates the solution to a
+% differential equation using Modified Euler's method.
+%
+%
+% INPUT(S):
+%
+% a: Our lower bound to the range of t in the differential equation y' =
+% f(t,y).
+%
+% b: Our upper bound to the range of t in the differential equation y' =
+% f(t,y).
+%
+% N: The number of points you want to approximate in the function.
+%
+% InitialApproximation: The value of y(a).
+%
+% f: The differential equation that we are trying to solve that is of the
+% form y' = f(t,y).
+%
+% OUTPUT(S):
+%
+% w: An array that approximates the solution to y. It is indexed as
+% followed: w(i) = y(ti).
+%
+% x: An array that holds all the ti values. This is useful for later
+% creating an approximate polynomial to our estimation.
+%
+% Written by: Mario Perales
+% April 4th, 2015 
+
+h = (b-a)/N;
+w = 1:N+1;
+x = 1:N+1;
+t = a;
+x(1) = t;
+w(1) = initialApprox;
+i = 2;
+
+while i < N+2
+    y = f(t,w(i-1));
+    w(i) = w(i-1) + h/2*(y + f(t+h, w(i-1) + h*y));
+    t = a + (i-1)*h;
+    x(i) = t;
+    i = i + 1;
+end;
+
+w = w';
+x = x';
