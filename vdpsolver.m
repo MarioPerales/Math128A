@@ -50,7 +50,7 @@ tic;
 alpha = [X0;DX0];
 tspan = [T0 Tfinal];
 hmin = eps;
-hmax = (Mu + .1)/3;
+hmax = 3/(Mu+.1);
 stepsize = [hmin hmax];
 
 % We need to create a vector that just takes the parameters and outputs
